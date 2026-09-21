@@ -1,6 +1,6 @@
 # Claim Ledger Lab
 
-**Decompose a model answer into claims. Score the claims. Name the human who may release — or abstain.**
+**Decompose a model answer into claims. Score the claims. Record the accountable human role or named decision owner who may release — or abstain.**
 
 This is a method lab, not a product and not a benchmark. It shows how AI implementation governance works on the *output* of a model: atomic claims, evidence, competing reads, and a release gate.
 
@@ -29,11 +29,11 @@ Fluent text hides mixed claim types. A single paragraph can contain a fact, an a
 
 - JSON matches `schema/claim-ledger.schema.json`
 - `verified` requires at least one evidence string
-- Confidence may not rest on model-vote count alone
+- Confidence may not use model-vote or model-consensus language, even if the word “evidence” also appears
 - Every claim lists at least one alternative read
 - Predictions cannot be marked `verified`
-- `green` is invalid while material claims are unsupported, contradicted, or unverifiable
-- A named `release_authority` is required unless the gate is `abstain`
+- `green` is invalid while any claim is unsupported, contradicted, or unverifiable — including ledgers with no recommendation
+- An accountable human role or named decision owner is required on `release_authority` unless the gate is `abstain`
 
 ## Run locally
 
@@ -56,4 +56,4 @@ python -m pytest tests/ -q
 
 ## Author
 
-Joel L. Vandenhouten — retired U.S. Army Major; intelligence, investigations, enterprise security, and GRC. Texas A&M University School of Law, Master of Legal Studies in Cybersecurity Law & Policy.
+Joel L. Vandenhouten — retired U.S. Army Major; intelligence, investigations, enterprise security, and GRC. Master of Legal Studies and graduate certificate in Cybersecurity Law & Policy, both in progress at Texas A&M University School of Law; expected 2027.

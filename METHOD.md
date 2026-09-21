@@ -27,15 +27,15 @@ This lab treats a block of text — usually a model answer — as a set of **ato
 
 ## Rules that make this governance, not styling
 
-1. **Consensus is not verification.** A confidence field that says only “three models agreed” fails validation.
+1. **Consensus is not verification.** A confidence field that uses model-vote or model-consensus language fails validation, even if it also says “evidence.”
 2. **Verified requires evidence.** Empty `evidence` on a `verified` claim is a hard fail.
-3. **Recommendations inherit the weakest supporting claim.** If a recommendation rests on an unsupported fact, the release gate cannot be green.
+3. **Green is blocked by any weak material claim.** Unsupported, contradicted, or unverifiable claims invalidate a green gate whether or not a recommendation is present.
 4. **Abstention is a successful control** when the packet cannot support a consequential action.
-5. **The human release authority is named.** The model does not close the case.
+5. **An accountable human role or named decision owner is recorded.** Synthetic cases may use a role title. The model does not close the case.
 
 ## Release gates
 
-- **green** — consequential claims are verified or clearly scoped as opinion; a named human may release
+- **green** — consequential claims are verified or clearly scoped as opinion; an accountable role or named owner may release
 - **amber** — material uncertainty remains; release only with documented residual risk
 - **red** — at least one material claim is contradicted or would cause harm if acted on
 - **abstain** — the honest output is that the question cannot be answered from this packet
