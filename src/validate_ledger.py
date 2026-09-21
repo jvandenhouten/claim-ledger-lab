@@ -20,6 +20,7 @@ VOTE_MARKERS = (
     "three models",
     "consensus of models",
 )
+WEAK_STATES = frozenset({"unsupported", "contradicted", "unverifiable"})
 
 
 def load_schema() -> dict:
@@ -36,6 +37,12 @@ def _schema_validate(ledger: dict) -> None:
     jsonschema.validate(instance=ledger, schema=load_schema())
 
 
+def _vote_only_confidence(basis: str) -> bool:
+    """True when confidence rests on model agreement, even if 'evidence' also appears."""
+    lowered = basis.lower()
+    return any(marker in lowered for marker in VOTE_MARKERS)
+
+
 def governance_validate(ledger: dict) -> list[str]:
     errors: list[str] = []
     claims = ledger.get("claims") or []
@@ -46,15 +53,15 @@ def governance_validate(ledger: dict) -> list[str]:
         cid = claim.get("claim_id", "?")
         state = claim.get("state")
         evidence = claim.get("evidence") or []
-        basis = (claim.get("confidence_basis") or "").lower()
+        basis = claim.get("confidence_basis") or ""
         alternatives = claim.get("alternatives") or []
 
         if state == "verified" and not evidence:
             errors.append(f"{cid}: verified claims require at least one evidence string")
 
-        if any(marker in basis for marker in VOTE_MARKERS) and "evidence" not in basis:
+        if _vote_only_confidence(basis):
             errors.append(
-                f"{cid}: confidence_basis may not rely on model-vote count alone"
+                f"{cid}: confidence_basis may not rely on model-vote or model-consensus language"
             )
 
         if not alternatives:
@@ -63,10 +70,8 @@ def governance_validate(ledger: dict) -> list[str]:
         if state == "verified" and claim.get("claim_type") == "prediction":
             errors.append(f"{cid}: predictions cannot be marked verified")
 
-    recs = [c for c in claims if c.get("claim_type") == "recommendation"]
-    weak = {"unsupported", "contradicted", "unverifiable"}
-    if recs and ledger.get("release_gate") == "green":
-        material_weak = [c["claim_id"] for c in claims if c.get("state") in weak]
+    if ledger.get("release_gate") == "green":
+        material_weak = [c["claim_id"] for c in claims if c.get("state") in WEAK_STATES]
         if material_weak:
             errors.append(
                 "green gate is invalid while material claims remain "
@@ -75,7 +80,9 @@ def governance_validate(ledger: dict) -> list[str]:
 
     if ledger.get("release_gate") in {"green", "amber", "red"}:
         if not (ledger.get("release_authority") or "").strip():
-            errors.append("named release_authority is required unless gate is abstain")
+            errors.append(
+                "accountable human role or named decision owner is required unless gate is abstain"
+            )
 
     return errors
 
