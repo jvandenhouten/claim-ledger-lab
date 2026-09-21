@@ -1,0 +1,20 @@
+{
+  "ledger_id": "CL-BAD",
+  "title": "Invalid ledger that relies on vote count",
+  "source_type": "model_output",
+  "source_text": "Synthetic invalid example used only to prove the validator rejects vote-count confidence.",
+  "analyst": "test",
+  "release_gate": "green",
+  "release_authority": "Nobody",
+  "claims": [
+    {
+      "claim_id": "X1",
+      "text": "The event is confirmed because three models agreed.",
+      "claim_type": "fact",
+      "state": "verified",
+      "evidence": [],
+      "confidence_basis": "three models agreed so the fact is true",
+      "alternatives": ["A single primary source might still be missing."]
+    }
+  ]
+}

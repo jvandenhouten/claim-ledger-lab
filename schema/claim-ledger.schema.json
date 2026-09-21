@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jvandenhouten/claim-ledger-lab/schema/claim-ledger.schema.json",
+  "title": "ClaimLedger",
+  "type": "object",
+  "required": ["ledger_id", "title", "source_type", "source_text", "analyst", "release_gate", "claims"],
+  "additionalProperties": false,
+  "properties": {
+    "ledger_id": { "type": "string", "minLength": 3 },
+    "title": { "type": "string", "minLength": 8 },
+    "source_type": { "type": "string", "enum": ["model_output", "human_report", "mixed"] },
+    "source_text": { "type": "string", "minLength": 20 },
+    "analyst": { "type": "string", "minLength": 2 },
+    "release_gate": { "type": "string", "enum": ["green", "amber", "red", "abstain"] },
+    "release_authority": { "type": "string" },
+    "notes": { "type": "string" },
+    "claims": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/claim" } }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "required": ["claim_id", "text", "claim_type", "state", "evidence", "confidence_basis", "alternatives"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": { "type": "string", "minLength": 2 },
+        "text": { "type": "string", "minLength": 8 },
+        "claim_type": { "type": "string", "enum": ["fact", "calculation", "assumption", "prediction", "opinion", "recommendation"] },
+        "state": { "type": "string", "enum": ["verified", "supported_uncertain", "disputed", "unsupported", "contradicted", "unverifiable", "stale"] },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 4 } },
+        "confidence_basis": { "type": "string", "minLength": 8 },
+        "alternatives": { "type": "array", "items": { "type": "string", "minLength": 4 } }
+      }
+    }
+  }
+}
