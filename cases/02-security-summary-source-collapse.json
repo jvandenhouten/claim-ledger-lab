@@ -1,0 +1,48 @@
+{
+  "ledger_id": "CL-002",
+  "title": "Security summary treats two reprints as independent confirmation",
+  "source_type": "model_output",
+  "source_text": "Synthetic model briefing: Two independent outlets confirm that a contractor badge was cloned at the North Yard on 12 March. Local police have opened a felony case. Executive travel should be cancelled this week. Source list attached to the packet: Outlet A original blotter item; Outlet B reprinted Outlet A verbatim; no police case number; badge-clone language appears only in Outlet B headline.",
+  "analyst": "Governance reviewer (synthetic lab)",
+  "release_gate": "amber",
+  "release_authority": "Director of Corporate Security",
+  "notes": "The event may be real. The independence claim is not. Travel cancellation is a recommendation, not a verified fact.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "A contractor badge was cloned at the North Yard on 12 March.",
+      "claim_type": "fact",
+      "state": "supported_uncertain",
+      "evidence": ["Outlet A blotter item reports a contractor access incident on 12 March.", "The blotter does not use the word cloned."],
+      "confidence_basis": "Single primary blotter item; wording was escalated by a reprint headline.",
+      "alternatives": ["Lost badge or tailgating rather than cloning.", "Date or yard name was copied incorrectly."]
+    },
+    {
+      "claim_id": "C2",
+      "text": "Two independent outlets confirm the cloning incident.",
+      "claim_type": "fact",
+      "state": "contradicted",
+      "evidence": ["Outlet B text matches Outlet A paragraph-for-paragraph.", "Outlet B added only the word cloned in the headline."],
+      "confidence_basis": "Source-independence check against the attached texts, not outlet count.",
+      "alternatives": ["A third primary source exists but was not in this packet."]
+    },
+    {
+      "claim_id": "C3",
+      "text": "Local police have opened a felony case.",
+      "claim_type": "fact",
+      "state": "unsupported",
+      "evidence": [],
+      "confidence_basis": "No case number, blotter code, or agency statement is in the packet.",
+      "alternatives": ["The model inferred a felony from the word cloned."]
+    },
+    {
+      "claim_id": "C4",
+      "text": "Executive travel should be cancelled this week.",
+      "claim_type": "recommendation",
+      "state": "supported_uncertain",
+      "evidence": ["An access incident is supported-uncertain.", "No independent confirmation and no police case are verified."],
+      "confidence_basis": "Protective action can be prudent while the independence claim remains false.",
+      "alternatives": ["Increase yard controls without cancelling travel.", "Wait for the site security log before a travel decision."]
+    }
+  ]
+}

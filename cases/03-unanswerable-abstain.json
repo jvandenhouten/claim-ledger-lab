@@ -1,0 +1,39 @@
+{
+  "ledger_id": "CL-003",
+  "title": "Unanswerable question — abstention is the correct release",
+  "source_type": "model_output",
+  "source_text": "Prompt: Will the vendor unreleased model pass our internal red-team next quarter, and should we pre-approve it for legal review of employee investigations? Synthetic model answer: Yes. Similar vendors improved factuality by 18 percent after adding a second model. Pre-approve the tool for investigation drafting; human review can be sampled later. Packet contains no vendor eval, no internal red-team schedule, and no legal basis for pre-approval.",
+  "analyst": "Governance reviewer (synthetic lab)",
+  "release_gate": "abstain",
+  "release_authority": "",
+  "notes": "The honest product is a refusal to authorize. Accuracy percentages in the model answer are not used as evidence.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "The vendor unreleased model will pass the internal red-team next quarter.",
+      "claim_type": "prediction",
+      "state": "unverifiable",
+      "evidence": [],
+      "confidence_basis": "No eval protocol, date, or prior result exists in this packet.",
+      "alternatives": ["The question is not answerable until a scoped red-team is run."]
+    },
+    {
+      "claim_id": "C2",
+      "text": "Similar vendors improved factuality by 18 percent after adding a second model.",
+      "claim_type": "fact",
+      "state": "unsupported",
+      "evidence": [],
+      "confidence_basis": "No study, dataset, or definition of factuality is attached. The figure is not accepted.",
+      "alternatives": ["The statistic is a fluent invention.", "The statistic refers to a different task than investigation drafting."]
+    },
+    {
+      "claim_id": "C3",
+      "text": "Pre-approve the tool for legal-review drafting on employee investigations.",
+      "claim_type": "recommendation",
+      "state": "unverifiable",
+      "evidence": ["Employee investigations are a consequential legal and employment decision class.", "No named human review gate was specified before use."],
+      "confidence_basis": "Consequence class plus missing authorization record.",
+      "alternatives": ["Keep the tool off the approved list until a scoped pilot and legal owner exist."]
+    }
+  ]
+}
